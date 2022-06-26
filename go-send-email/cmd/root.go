@@ -10,18 +10,11 @@ import (
 	"github.com/spf13/cobra"
 )
 
-
-
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "go-send-email",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Automation sending email with template",
+	Long:  `Application read list customers' email from CSV and send contents with template to them`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
@@ -45,7 +38,8 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	rootCmd.PersistentFlags().StringP("customers", "c", "", "customer info path")
+	rootCmd.PersistentFlags().StringP("template", "t", "", "template email path")
+	rootCmd.PersistentFlags().StringP("output", "o", "", "output path")
+	rootCmd.PersistentFlags().StringP("error", "e", "", "error path")
 }
-
-

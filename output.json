@@ -1,0 +1,26 @@
+[
+	{
+		"From": "The Marketing Team\u003cmarketing@example.com",
+		"Subject": "A new product is being launched soon...",
+		"MimeType": "text/plain",
+		"Body": "Hi Mr Quan Huynh,\nToday, 26 Jun 2022, we would like to tell you that... \nSincrely,\nThe Marketing Team"
+	},
+	{
+		"From": "The Marketing Team\u003cmarketing@example.com",
+		"Subject": "A new product is being launched soon...",
+		"MimeType": "text/plain",
+		"Body": "Hi Mr Ethanol Ethanol,\nToday, 26 Jun 2022, we would like to tell you that... \nSincrely,\nThe Marketing Team"
+	},
+	{
+		"From": "The Marketing Team\u003cmarketing@example.com",
+		"Subject": "A new product is being launched soon...",
+		"MimeType": "text/plain",
+		"Body": "Hi Mr  ,\nToday, 26 Jun 2022, we would like to tell you that... \nSincrely,\nThe Marketing Team"
+	},
+	{
+		"From": "The Marketing Team\u003cmarketing@example.com",
+		"Subject": "A new product is being launched soon...",
+		"MimeType": "text/plain",
+		"Body": "Hi Mr John ,\nToday, 26 Jun 2022, we would like to tell you that... \nSincrely,\nThe Marketing Team"
+	}
+]
