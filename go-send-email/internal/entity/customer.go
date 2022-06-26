@@ -1,6 +1,6 @@
-package send
+package entity
 
-import "net/mail"
+import "github.com/ethanol1310/send-template-emails/go-send-email/pkg/common"
 
 type CustomerInfo struct {
 	Title     string `csv:"TITLE"`
@@ -10,10 +10,5 @@ type CustomerInfo struct {
 }
 
 func (customerInfo *CustomerInfo) ValidCustomer() bool {
-	return customerInfo.ValidEmail()
-}
-
-func (customerInfo *CustomerInfo) ValidEmail() bool {
-	_, err := mail.ParseAddress(customerInfo.Email)
-	return err == nil
+	return common.ValidEmail(customerInfo.Email)
 }

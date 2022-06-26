@@ -7,7 +7,8 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/ethanol1310/send-template-emails/go-send-email/send"
+	"github.com/ethanol1310/send-template-emails/go-send-email/internal/entity"
+	"github.com/ethanol1310/send-template-emails/go-send-email/internal/usecase/esending"
 	"github.com/spf13/cobra"
 )
 
@@ -28,13 +29,13 @@ var sendCmd = &cobra.Command{
 
 		// ::TODO
 		// Call send email function
-		app := send.ESendingAutomation{
+		esendingInfo := entity.ESendingAutomation{
 			TemplatePath:      template,
 			CustomerPath:      custormers,
 			ErrorCustomerPath: errorPath,
 			Output:            output}
-		app.PrepareCustomer()
-		app.Send()
+		service := &esending.Service{}
+		service.Send(esendingInfo)
 	},
 }
 

@@ -1,4 +1,4 @@
-package send
+package entity
 
 import (
 	"encoding/json"
@@ -7,7 +7,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/ethanol1310/send-template-emails/go-send-email/send/common"
+	"github.com/ethanol1310/send-template-emails/go-send-email/pkg/common"
 )
 
 type Mail struct {
@@ -37,7 +37,7 @@ func (mail *Mail) ReadTemplate(filePath string) {
 	}
 }
 
-func (mail *Mail) GenerateContent(templateBody string, customerInfo CustomerInfo) {
+func (mail *Mail) GenerateMailFromTemplate(templateBody string, customerInfo CustomerInfo) {
 	today := time.Now().Format(common.TIME_FORMAT)
 	info := TemplateInfo{customerInfo.Title, customerInfo.FirstName, customerInfo.LastName, today}
 	mail.Body = info.ParseString(common.TEMPLATE_NAME, templateBody)

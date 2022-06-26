@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"net/mail"
 	"os"
 	"path/filepath"
 )
@@ -55,4 +56,9 @@ func FileExists(filePath string) bool {
 		return false
 	}
 	return !info.IsDir()
+}
+
+func ValidEmail(email string) bool {
+	_, err := mail.ParseAddress(email)
+	return err == nil
 }
