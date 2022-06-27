@@ -8,7 +8,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/ethanol1310/send-template-emails/go-send-email/pkg/common"
+	"github.com/ethanol1310/send-template-emails/pkg/common"
 )
 
 func WriteStringToFile(filePath string, content string, append bool) (erCode int) {

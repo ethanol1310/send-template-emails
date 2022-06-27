@@ -8,7 +8,7 @@ import (
 	"regexp"
 	"time"
 
-	"github.com/ethanol1310/send-template-emails/go-send-email/pkg/common"
+	"github.com/ethanol1310/send-template-emails/pkg/common"
 )
 
 type Mail struct {

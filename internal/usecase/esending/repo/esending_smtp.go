@@ -3,7 +3,7 @@ package repo
 import (
 	"fmt"
 
-	"github.com/ethanol1310/send-template-emails/go-send-email/pkg/common"
+	"github.com/ethanol1310/send-template-emails/pkg/common"
 	"gopkg.in/gomail.v2"
 )
 
