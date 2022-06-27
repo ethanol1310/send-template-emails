@@ -3,7 +3,7 @@ package entity_test
 import (
 	"testing"
 
-	"github.com/ethanol1310/send-template-emails/go-send-email/internal/entity"
+	"github.com/ethanol1310/send-template-emails/internal/entity"
 	"gopkg.in/go-playground/assert.v1"
 )
 

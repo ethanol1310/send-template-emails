@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ethanol1310/send-template-emails/go-send-email/internal/entity"
-	"github.com/ethanol1310/send-template-emails/go-send-email/pkg/common"
-	"github.com/ethanol1310/send-template-emails/go-send-email/pkg/helper"
+	"github.com/ethanol1310/send-template-emails/internal/entity"
+	"github.com/ethanol1310/send-template-emails/pkg/common"
+	"github.com/ethanol1310/send-template-emails/pkg/helper"
 	"github.com/gocarina/gocsv"
 	"gopkg.in/gomail.v2"
 )
@@ -53,8 +53,8 @@ func (s *ESendingTemplate) PrepareMailToSend(e entity.ESendingAutomation) (erCod
 			mail := &entity.Mail{}
 			_, erCode = mail.GenerateMailFromTemplate(templateMail, *customer)
 			if common.IS_SUCCESS(erCode) {
-				listMail = append(listMail, s.ListMail[*customer])
 				s.ListMail[*customer] = mail
+				listMail = append(listMail, s.ListMail[*customer])
 			}
 		} else {
 			if !helper.FileExists(e.ErrorCustomerPath) {

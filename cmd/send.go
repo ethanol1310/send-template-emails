@@ -9,12 +9,12 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/ethanol1310/send-template-emails/go-send-email/internal/entity"
-	"github.com/ethanol1310/send-template-emails/go-send-email/internal/usecase/esending"
-	"github.com/ethanol1310/send-template-emails/go-send-email/internal/usecase/esending/configer"
-	"github.com/ethanol1310/send-template-emails/go-send-email/internal/usecase/esending/repo"
-	"github.com/ethanol1310/send-template-emails/go-send-email/pkg/common"
-	"github.com/ethanol1310/send-template-emails/go-send-email/pkg/helper"
+	"github.com/ethanol1310/send-template-emails/internal/entity"
+	"github.com/ethanol1310/send-template-emails/internal/usecase/esending"
+	"github.com/ethanol1310/send-template-emails/internal/usecase/esending/configer"
+	"github.com/ethanol1310/send-template-emails/internal/usecase/esending/repo"
+	"github.com/ethanol1310/send-template-emails/pkg/common"
+	"github.com/ethanol1310/send-template-emails/pkg/helper"
 	"github.com/spf13/cobra"
 	"gopkg.in/gomail.v2"
 )
@@ -60,7 +60,7 @@ var sendCmd = &cobra.Command{
 			fmt.Printf("PrepareMailToSend - erCode=%d\n", erCode)
 		}
 		service.Send()
-		fmt.Printf("FilePath: \nCustomers: %s\nTemplate: %s\nOutput: %s\nErrorPath: %s\n", custormers, template, output, errorPath)
+		fmt.Printf("FilePath: \nCustomers: %s\nTemplate: %s\nOutput: %s\nErrorCustomer: %s\n", custormers, template, output, errorPath)
 	},
 }
 

@@ -1,6 +1,6 @@
 package entity
 
-import "github.com/ethanol1310/send-template-emails/go-send-email/pkg/helper"
+import "github.com/ethanol1310/send-template-emails/pkg/helper"
 
 type CustomerInfo struct {
 	Title     string `csv:"TITLE"`

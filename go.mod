@@ -1,4 +1,4 @@
-module github.com/ethanol1310/send-template-emails/go-send-email
+module github.com/ethanol1310/send-template-emails
 
 go 1.17
 
