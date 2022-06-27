@@ -1,4 +1,4 @@
-package common
+package helper
 
 import (
 	"encoding/json"
@@ -7,9 +7,11 @@ import (
 	"net/mail"
 	"os"
 	"path/filepath"
+
+	"github.com/ethanol1310/send-template-emails/go-send-email/pkg/common"
 )
 
-func WriteStringToFile(filePath string, content string, append bool) {
+func WriteStringToFile(filePath string, content string, append bool) (erCode int) {
 	var flag int
 	if append {
 		flag = os.O_APPEND | os.O_CREATE | os.O_WRONLY
@@ -19,16 +21,17 @@ func WriteStringToFile(filePath string, content string, append bool) {
 
 	file, err := os.OpenFile(filePath, flag, 0644)
 	if err != nil {
-		log.Println(err)
+		erCode = common.MKFAIL(common.NOT_OPEN)
 	}
 
 	defer file.Close()
 	if _, err := file.WriteString(content); err != nil {
-		log.Println(err)
+		erCode = common.MKFAIL(common.NOT_WRITE)
 	}
+	return common.MKSUCCESS()
 }
 
-func WriteDataToJson(filePath string, content interface{}) {
+func WriteDataToJson(filePath string, content interface{}) (erCode int) {
 	if filepath.Ext(filePath) != ".json" {
 		log.Println("filePath is not json")
 		return
@@ -36,18 +39,19 @@ func WriteDataToJson(filePath string, content interface{}) {
 
 	file, err := os.OpenFile(filePath, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0644)
 	if err != nil {
-		log.Println(err)
+		erCode = common.MKFAIL(common.NOT_OPEN)
 	}
 	defer file.Close()
 
 	dataBytes, err := json.MarshalIndent(content, "", "\t")
 	if err != nil {
-		log.Println(err)
+		erCode = common.MKFAIL(common.NOT_MARSHALL)
 	}
 
 	if _, err := fmt.Fprintf(file, "%s\n", dataBytes); err != nil {
-		fmt.Println(err)
+		erCode = common.MKFAIL(common.NOT_WRITE)
 	}
+	return common.MKSUCCESS()
 }
 
 func FileExists(filePath string) bool {

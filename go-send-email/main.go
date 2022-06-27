@@ -1,5 +1,5 @@
 /*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
+Copyright © 2022 QUAN HUYNH <quanhuynh1310@gmail.com>
 
 */
 package main

@@ -3,6 +3,8 @@ package entity
 import (
 	"bytes"
 	"text/template"
+
+	"github.com/ethanol1310/send-template-emails/go-send-email/pkg/common"
 )
 
 type TemplateInfo struct {
@@ -12,18 +14,18 @@ type TemplateInfo struct {
 	TODAY      string
 }
 
-func (templateInfo *TemplateInfo) ParseString(templateName string, templateBody string) (result string) {
+func (templateInfo *TemplateInfo) ParseString(templateName string, templateBody string) (result string, erCode int) {
 	t, err := template.New(templateName).Parse(templateBody)
 	if err != nil {
-		panic(err)
+		return result, common.MKFAIL(common.FAILED)
 	}
 
 	var ret bytes.Buffer
 	err = t.Execute(&ret, templateInfo)
 	if err != nil {
-		panic(err)
+		return result, common.MKFAIL(common.FAILED)
 	}
 
 	result = ret.String()
-	return result
+	return result, common.MKSUCCESS()
 }

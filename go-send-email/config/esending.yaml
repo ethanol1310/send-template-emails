@@ -1,0 +1,6 @@
+smtp:
+  host: "smtp.gmail.com"
+  port: 587
+  username: "quanhuynh1310@gmail.com"
+  password: "gsjpeertcovtsleh"
+  tls_verify: true

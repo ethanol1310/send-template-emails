@@ -1,6 +1,6 @@
 package entity
 
-import "github.com/ethanol1310/send-template-emails/go-send-email/pkg/common"
+import "github.com/ethanol1310/send-template-emails/go-send-email/pkg/helper"
 
 type CustomerInfo struct {
 	Title     string `csv:"TITLE"`
@@ -10,5 +10,5 @@ type CustomerInfo struct {
 }
 
 func (customerInfo *CustomerInfo) ValidCustomer() bool {
-	return common.ValidEmail(customerInfo.Email)
+	return helper.ValidEmail(customerInfo.Email)
 }
