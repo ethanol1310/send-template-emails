@@ -9,6 +9,15 @@ type CustomerInfo struct {
 	Email     string `csv:"EMAIL"`
 }
 
+func NewCustomer(title string, first string, last string, email string) *CustomerInfo {
+	return &CustomerInfo{
+		Title:     title,
+		FirstName: first,
+		LastName:  last,
+		Email:     email,
+	}
+}
+
 func (customerInfo *CustomerInfo) ValidCustomer() bool {
 	return helper.ValidEmail(customerInfo.Email)
 }

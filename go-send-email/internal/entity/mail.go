@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"regexp"
 	"time"
 
 	"github.com/ethanol1310/send-template-emails/go-send-email/pkg/common"
@@ -17,11 +18,30 @@ type Mail struct {
 	Body     string
 }
 
+func NewMail(from string, subject string, mime string, body string) *Mail {
+	return &Mail{
+		From:     from,
+		Subject:  subject,
+		MimeType: mime,
+		Body:     body,
+	}
+}
+
 func (mail *Mail) generateBodyFromTemplate(templateBody string, customerInfo CustomerInfo) (erCode int) {
 	today := time.Now().Format(common.TIME_FORMAT)
 	info := TemplateInfo{customerInfo.Title, customerInfo.FirstName, customerInfo.LastName, today}
 	mail.Body, erCode = info.ParseString("esending", templateBody)
 	return erCode
+}
+
+func (mail *Mail) ParseEmailInFrom() {
+	// Use regex to parse email from string
+	re := regexp.MustCompile(`([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)`)
+	from := re.FindAllString(mail.From, -1)
+	if from == nil {
+		from = append(from, "default@example.com")
+	}
+	mail.From = from[0]
 }
 
 func (mail *Mail) ReadTemplateMail(filePath string) (errCode int) {

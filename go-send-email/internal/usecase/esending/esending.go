@@ -37,6 +37,12 @@ func (s *ESendingTemplate) PrepareMailToSend(e entity.ESendingAutomation) (erCod
 	s.ListMail = make(map[entity.CustomerInfo]*entity.Mail, len(customers))
 	templateMail := entity.Mail{}
 	erCode = templateMail.ReadTemplateMail(e.TemplatePath)
+
+	// Parse email in From
+	// E.g: The Marketing Team<marketing@example.com -> marketing@example.com
+	// If not email in from -> default@example.com
+	templateMail.ParseEmailInFrom()
+
 	if !common.IS_SUCCESS(erCode) {
 		return erCode
 	}
@@ -45,12 +51,10 @@ func (s *ESendingTemplate) PrepareMailToSend(e entity.ESendingAutomation) (erCod
 	for _, customer := range customers {
 		if customer.ValidCustomer() {
 			mail := &entity.Mail{}
-			s.ListMail[*customer], erCode = mail.GenerateMailFromTemplate(templateMail, *customer)
+			_, erCode = mail.GenerateMailFromTemplate(templateMail, *customer)
 			if common.IS_SUCCESS(erCode) {
 				listMail = append(listMail, s.ListMail[*customer])
-			} else {
-				// ::TODO
-				// Log
+				s.ListMail[*customer] = mail
 			}
 		} else {
 			if !helper.FileExists(e.ErrorCustomerPath) {
@@ -76,6 +80,7 @@ func (s *ESendingTemplate) Send() (erCode int) {
 	for customer, mail := range s.ListMail {
 		m := gomail.NewMessage()
 
+		m.SetHeader("From", mail.From)
 		m.SetHeader("To", customer.Email)
 		m.SetHeader("Subject", mail.Subject)
 		m.SetBody("text/plain", mail.Body)

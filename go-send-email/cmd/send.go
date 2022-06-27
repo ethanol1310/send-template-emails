@@ -35,7 +35,7 @@ var sendCmd = &cobra.Command{
 			filepath.Ext(errorPath) != ".csv" ||
 			!helper.FileExists(template) || filepath.Ext(template) != ".json" ||
 			filepath.Ext(output) != ".json" {
-			fmt.Printf("File extension wrong or File is not Exist\n")
+			fmt.Printf("Wrong file extension or File is not Exist\n")
 			return
 		}
 

@@ -1,6 +1,8 @@
 package repo
 
 import (
+	"fmt"
+
 	"github.com/ethanol1310/send-template-emails/go-send-email/pkg/common"
 	"gopkg.in/gomail.v2"
 )
@@ -15,9 +17,8 @@ func New(sp *gomail.Dialer) *SMTPRepo {
 }
 
 func (sp *SMTPRepo) DialAndSendMail(m *gomail.Message) (erCode int) {
-	m.SetHeader("From", sp.Username)
-
 	if err := sp.DialAndSend(m); err != nil {
+		fmt.Println(err)
 		return common.MKFAIL(common.FAILED)
 	}
 	return common.MKSUCCESS()
