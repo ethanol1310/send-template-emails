@@ -62,3 +62,42 @@ func TestGenerateMailFromTemplate(t *testing.T) {
 		}
 	}
 }
+
+func TestParseEmailInFrom(t *testing.T) {
+	type test struct {
+		From       string
+		ValidEmail string
+	}
+	tests := []test{
+		{
+			From:       "The Marketing Team <marketing@example.com>",
+			ValidEmail: "marketing@example.com",
+		},
+		{
+			From:       "marketing@example>",
+			ValidEmail: "default@example.com",
+		},
+		{
+			From:       "The Marketing Team",
+			ValidEmail: "default@example.com",
+		},
+		{
+			From:       "The Marketing Team abcd@abcd mar@a.com",
+			ValidEmail: "mar@a.com",
+		},
+		{
+			From:       "The Marketing Team <quanhuynh1310@gmail.com",
+			ValidEmail: "quanhuynh1310@gmail.com",
+		},
+		{
+			From:       "The Marketing Team <validemail1302@gmail.com>",
+			ValidEmail: "validemail1302@gmail.com",
+		},
+	}
+
+	for _, tc := range tests {
+		mail := entity.NewMail(tc.From, "subject", "text/plain", "body")
+		mail.ParseEmailInFrom()
+		assert.Equal(t, mail.From, tc.ValidEmail)
+	}
+}

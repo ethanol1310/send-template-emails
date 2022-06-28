@@ -62,7 +62,10 @@ func FileExists(filePath string) bool {
 	return !info.IsDir()
 }
 
-func ValidEmail(email string) bool {
-	_, err := mail.ParseAddress(email)
-	return err == nil
+func ValidEmailRFC5322(email string) (string, bool) {
+	addr, err := mail.ParseAddress(email)
+	if err != nil {
+		return "", false
+	}
+	return addr.Address, true
 }

@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/ethanol1310/send-template-emails/pkg/common"
+	"github.com/ethanol1310/send-template-emails/pkg/helper"
 )
 
 type Mail struct {
@@ -39,9 +40,14 @@ func (mail *Mail) ParseEmailInFrom() {
 	re := regexp.MustCompile(`([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)`)
 	from := re.FindAllString(mail.From, -1)
 	if from == nil {
-		from = append(from, "default@example.com")
+		mail.From = "default@example.com"
+		return
 	}
-	mail.From = from[0]
+	if _, err := helper.ValidEmailRFC5322(from[0]); err {
+		mail.From = from[0]
+	} else {
+		mail.From = "default@example.com"
+	}
 }
 
 func (mail *Mail) ReadTemplateMail(filePath string) (errCode int) {

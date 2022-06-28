@@ -19,5 +19,6 @@ func NewCustomer(title string, first string, last string, email string) *Custome
 }
 
 func (customerInfo *CustomerInfo) ValidCustomer() bool {
-	return helper.ValidEmail(customerInfo.Email)
+	_, err := helper.ValidEmailRFC5322(customerInfo.Email)
+	return err
 }

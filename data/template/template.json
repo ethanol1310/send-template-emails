@@ -1,5 +1,5 @@
 {
-    "from": "The Marketing Team<marketing@example.com",
+    "from": "The Marketing Team <marketing@example.com>",
     "subject": "A new product is being launched soon...",
     "mimeType": "text/plain",
     "body": "Hi {{.TITLE}} {{.FIRST_NAME}} {{.LAST_NAME}},\nToday, {{.TODAY}}, we would like to tell you that... \nSincrely,\nThe Marketing Team"
